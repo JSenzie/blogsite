@@ -14,7 +14,7 @@ const PostById = () => {
   const token = getToken()
 
   const getPost = async (): Promise<PostData> => {
-    const response = await axios.get(`http://localhost:3000/post/${postId}`)
+    const response = await axios.get(`https://nsbackend-production.up.railway.app/post/${postId}`)
     return response.data
   }
 
@@ -25,7 +25,7 @@ const PostById = () => {
 
   const handleComment = async () => {
     const response = await axios.post(
-      `http://localhost:3000/comment/${postId}`,
+      `https://nsbackend-production.up.railway.app/comment/${postId}`,
       { content: comment },
       {
         withCredentials: true,
@@ -53,29 +53,32 @@ const PostById = () => {
   const { isPending: commentIsPending, isError: commentIsError, error: commentError } = mutation
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 flex-grow">
-      <div className="md:w-1/3 min-h-60 bg-white rounded-lg">
+    <div className="flex flex-col lg:flex-row gap-4">
+      <div className="min-h-60 bg-white rounded-lg lg:w-2/3 max-h-96 overflow-y-auto p-4">
         {isError && axios.isAxiosError(error) && error.response?.data?.message}
         {isPending && <Spinner />}
         {data && (
-          <div className="bg-white rounded-lg p-2 flex flex-col gap-2">
-            <h2 className="text-2xl font-semibold border-b-2 border-black">{data.title}</h2>
+          <div className="bg-white rounded-lg flex flex-col gap-2">
+            <div className="flex justify-between border-b-2 border-black">
+              <h2 className="text-2xl font-semibold ">{data.title}</h2>
+              <p>{data.createdAt.split("T")[0]}</p>
+            </div>
             <p className="text-xl">{data.content}</p>
           </div>
         )}
       </div>
 
-      <div className="md:w-2/3 flex flex-col gap-2">
+      <div className="flex flex-col gap-2 lg:w-1/3">
         {commentIsError && axios.isAxiosError(commentError) && commentError.response?.data?.message}
-        <form className="flex flex-col md:flex-row gap-2 items-center" onSubmit={handleSubmit}>
-          <textarea className="p-1 w-2/3 md:w-1/2 rounded-lg" placeholder="Comment" name="comment" value={comment} onChange={(e) => setComment(e.target.value)} />
-          <button type="submit" className="bg-blue-500 rounded-lg p-2">
+        <form className="flex gap-2" onSubmit={handleSubmit}>
+          <textarea className="p-2 rounded-lg flex-1" placeholder="Comment" name="comment" value={comment} onChange={(e) => setComment(e.target.value)} />
+          <button type="submit" className="bg-blue-500 rounded-lg p-2 h-12 w-20">
             Submit
           </button>
         </form>
         {commentIsPending && <Spinner />}
         {data?.comments && (
-          <div className="flex flex-col gap-2 rounded-lg">
+          <div className="flex flex-col gap-2 rounded-lg w-full">
             {data.comments.map((item) => (
               <Comment key={item.id} item={item} />
             ))}

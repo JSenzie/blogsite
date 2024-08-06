@@ -18,7 +18,7 @@ const CreatePost = () => {
   const sendPost = async (data: { title: string; content: string }): Promise<PostId> => {
     console.log(data.title, data.content)
     const response = await axios.post(
-      "http://localhost:3000/post",
+      "https://nsbackend-production.up.railway.app/post",
       { title: data.title, content: data.content },
       {
         withCredentials: true,

@@ -9,7 +9,7 @@ const Post = ({ item, getToken, queryClient }: { item: PostData; getToken: () =>
   const isModerator = checkRole("moderator")
 
   const handleDelete = async (postId: string): Promise<void> => {
-    const response = await axios.delete(`http://localhost:3000/post/${postId}`, {
+    const response = await axios.delete(`https://nsbackend-production.up.railway.app/post/${postId}`, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const Post = ({ item, getToken, queryClient }: { item: PostData; getToken: () =>
   const { isPending } = mutation
 
   return (
-    <div className="flex p-2 m-2 gap-2 border-2 border-yellow-200 hover:bg-red-500 rounded-lg">
+    <div className="flex mb-2 p-2 gap-2 border-2 border-yellow-200 hover:bg-red-500 rounded-lg break-all">
       <Link to={`/post/${item.id}`}>
         <h2 className="text-xl font-semibold">{item.title}</h2>
       </Link>

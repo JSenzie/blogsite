@@ -5,14 +5,21 @@ import CreatePost from "./pages/Post/CreatePost.tsx"
 
 import Posts from "./pages/Post/Posts.tsx"
 import PostById from "./pages/Post/PostById.tsx"
+import BasePost from "./pages/Post/BasePost.tsx"
 
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
-      { path: "/", element: <Posts /> },
+      {
+        path: "/",
+        element: <Posts />,
+        children: [
+          { path: "/", element: <BasePost /> },
+          { path: "/post/:postId", element: <PostById /> },
+        ],
+      },
       { path: "/post/create", element: <CreatePost /> },
-      { path: "/post/:postId", element: <PostById /> },
     ],
   },
 ])

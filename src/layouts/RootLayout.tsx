@@ -25,13 +25,13 @@ const RootLayout = () => {
   return (
     <ClerkProvider routerPush={(to) => navigate(to)} routerReplace={(to) => navigate(to, { replace: true })} publishableKey={PUBLISHABLE_KEY}>
       <QueryClientProvider client={queryClient}>
-        <div className="flex flex-col w-full h-[100dvh] bg-yellow-100">
+        <div className="flex flex-col w-full">
           <header className="flex p-4 items-center  h-[10vh] border-b-2 justify-between">
-            <div className="flex gap-4 items-center">
+            <div className="p-2 bg-blue-500 rounded-lg">
               <Link to={"/post/create"}>Create Post</Link>
             </div>
             <div>
-              <Link to={{ pathname: "/", search: "" }} className="text-xl font-bold">
+              <Link to={{ pathname: "/", search: "" }} className="text-2xl font-bold">
                 BlogSite
               </Link>
             </div>
@@ -39,17 +39,17 @@ const RootLayout = () => {
               <UserButton />
               <SignedOut>
                 <SignInButton>
-                  <button className="p-2 bg-blue-500 rounded-lg text-sm">Sign In</button>
+                  <button className="p-2 bg-blue-500 rounded-lg">Sign In</button>
                 </SignInButton>
               </SignedOut>
               <SignedIn>
                 <SignOutButton>
-                  <button className="p-2 bg-blue-500 rounded-lg text-sm">Sign Out</button>
+                  <button className="p-2 bg-blue-500 rounded-lg">Sign Out</button>
                 </SignOutButton>
               </SignedIn>
             </div>
           </header>
-          <main className="m-2 p-4 min-h-[80vh] bg-blue-200 rounded-lg flex flex-1">
+          <main className="m-2 p-4 min-h-[80vh] bg-blue-200 rounded-lg flex">
             <Outlet />
           </main>
           <footer className="text-center py-2">Joseph Sensback 2024</footer>
