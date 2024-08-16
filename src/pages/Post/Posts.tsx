@@ -34,7 +34,7 @@ const Posts = () => {
   const getPosts = async () => {
     const searchParams = new URLSearchParams(location.search)
     const queryParam = searchParams.get("q")
-    const response = await axios.get(`https://nsbackend-production.up.railway.app/post?q=${queryParam || ""}`)
+    const response = await axios.get(`https://nsbackend-production.up.railway.app/post/?q=${queryParam || ""}`)
     return response.data
   }
 

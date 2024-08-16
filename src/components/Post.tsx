@@ -31,10 +31,15 @@ const Post = ({ item, getToken, queryClient }: { item: PostData; getToken: () =>
   return (
     <div className="flex mb-2 p-2 gap-2 border-2 border-yellow-200 hover:bg-red-500 rounded-lg break-all">
       <Link to={`/post/${item.id}`}>
-        <h2 className="text-xl font-semibold">{item.title}</h2>
+        <h2 className="text-xl font-semibold flex items-center gap-2">
+          {item.author?.first_name && <p>{item.author.first_name}</p>}
+          {item.author?.imageUrl && <img className="h-6 w-6 rounded-full" src={item.author.imageUrl} />}
+          {item.title}
+        </h2>
       </Link>
       {(isAdmin || isModerator) && (
         <button
+          className="text-nowrap"
           onClick={async () => {
             mutation.mutate(item.id)
           }}

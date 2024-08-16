@@ -21,6 +21,7 @@ declare global {
     createdAt?: string
     author: {
       id: string
+      imageUrl?: string
     }
   }
 
@@ -31,6 +32,10 @@ declare global {
     content: string
     authorId: string
     comments?: CommentData[]
+    author: {
+      imageUrl?: string
+      first_name?: string
+    }
   }
 }
 
